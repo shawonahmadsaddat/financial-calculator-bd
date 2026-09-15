@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Financial Calculator BD</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--accent:#2563eb;--line:#e2e8f0;--soft:#eff6ff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:760px;margin:auto;padding:18px 16px 88px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;border-radius:14px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:800;font-size:20px}
+h1{font-size:21px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}
+button{border:0;cursor:pointer}.iconbtn{width:42px;height:42px;border-radius:13px;background:var(--card);box-shadow:0 4px 16px #0f172a10;font-size:19px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;border-radius:24px;padding:22px;margin-bottom:18px;box-shadow:0 12px 30px #0f172a20}
+.hero p{margin:5px 0 0;color:#cbd5e1;font-size:13px}.hero strong{font-size:25px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;text-align:left;min-height:108px;box-shadow:0 5px 18px #0f172a08}.card .emoji{font-size:25px}.card b{display:block;margin-top:10px}.card small{color:var(--muted)}
+.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-top:16px}.panel.active{display:block}.back{background:var(--soft);color:var(--accent);padding:9px 13px;border-radius:10px;margin-bottom:14px}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 6px}input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff}
+.calc{width:100%;padding:14px;border-radius:13px;background:var(--accent);color:white;font-weight:700;margin-top:16px}.result{background:var(--soft);border-radius:16px;padding:16px;margin-top:16px}.result strong{font-size:24px}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dbeafe}.row:last-child{border:0}.nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffee;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px calc(16px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center}.nav button{background:transparent;color:var(--muted);padding:6px 24px;font-weight:600}.ad{height:50px;border:1px dashed #cbd5e1;border-radius:12px;display:grid;place-items:center;color:#94a3b8;font-size:11px;margin:16px 0}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}body.dark{--bg:#0b1120;--card:#111827;--text:#f8fafc;--muted:#94a3b8;--line:#263244;--soft:#172554}body.dark input,body.dark select{background:#0f172a;color:#fff}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand"><div class="logo">৳</div><div><h1>Financial Calculator BD</h1><div class="sub">Smart tools for Bangladesh</div></div></div><button class="iconbtn" onclick="toggleDark()">◐</button></header>
+<section class="hero"><strong>Plan smarter. Save better.</strong><p>Calculate loans, DPS, FDR and savings goals in seconds.</p></section>
+<div class="ad">ADVERTISEMENT</div>
+<div id="home" class="grid">
+  <button class="card" onclick="openCalc('emi')"><span class="emoji">🏦</span><b>EMI / Loan</b><small>Monthly installment</small></button>
+  <button class="card" onclick="openCalc('dps')"><span class="emoji">💰</span><b>DPS</b><small>Deposit maturity</small></button>
+  <button class="card" onclick="openCalc('fdr')"><span class="emoji">📈</span><b>FDR</b><small>Fixed deposit</small></button>
+  <button class="card" onclick="openCalc('goal')"><span class="emoji">🎯</span><b>Kotipoti Goal</b><small>Reach ৳1 crore</small></button>
+  <button class="card" onclick="openCalc('million')"><span class="emoji">💎</span><b>Millionaire Goal</b><small>Reach ৳10 lakh</small></button>
+  <button class="card" onclick="openCalc('interest')"><span class="emoji">📊</span><b>Simple Interest</b><small>Basic interest</small></button>
+  <button class="card" onclick="openCalc('compound')"><span class="emoji">📈</span><b>Compound Interest</b><small>Growth over time</small></button>
+  <button class="card" onclick="openCalc('bank')"><span class="emoji">🏦</span><b>Bank Comparison</b><small>Compare returns</small></button>
+  <button class="card" onclick="openCalc('sanchay')"><span class="emoji">🏛️</span><b>Sanchayapatra</b><small>Estimate return</small></button>
+  <button class="card" onclick="openCalc('eligibility')"><span class="emoji">✅</span><b>Loan Eligibility</b><small>Estimate affordability</small></button>
+</div>
+<section id="panel" class="panel"></section>
+</div>
+<div class="nav"><button onclick="showHome()">⌂ Home</button><button onclick="alert('History will be added in the next version.')">◷ History</button></div>
+<script>
+const p=document.getElementById('panel'),home=document.getElementById('home');
+const money=n=>'৳'+Number(n||0).toLocaleString('en-BD',{maximumFractionDigits:2});
+function showHome(){p.classList.remove('active');home.style.display='grid'}
+function openCalc(type){home.style.display='none';p.classList.add('active');
+let html='<button class="back" onclick="showHome()">← Back</button>';
+if(type==='emi') html+=`<h2>EMI / Loan Calculator</h2><label>Loan amount (৳)</label><input id="a" type="number" value="1000000"><label>Annual interest (%)</label><input id="r" type="number" step=".01" value="10"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="emi()">Calculate</button><div id="out"></div>`;
+if(type==='dps') html+=`<h2>DPS Calculator</h2><label>Monthly deposit (৳)</label><input id="a" type="number" value="5000"><label>Annual profit rate (%)</label><input id="r" type="number" step=".01" value="8"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="dps()">Calculate</button><div id="out"></div>`;
+if(type==='fdr') html+=`<h2>FDR Calculator</h2><label>Deposit (৳)</label><input id="a" type="number" value="500000"><label>Annual profit rate (%)</label><input id="r" type="number" step=".01" value="9"><label>Tenure (years)</label><input id="n" type="number" value="1"><button class="calc" onclick="fdr()">Calculate</button><div id="out"></div>`;
+if(type==='goal'||type==='million') {let target=type==='goal'?10000000:1000000;html+=`<h2>${type==='goal'?'Kotipoti':'Millionaire'} Goal</h2><label>Current savings (৳)</label><input id="a" type="number" value="100000"><label>Monthly deposit (৳)</label><input id="m" type="number" value="10000"><label>Expected annual return (%)</label><input id="r" type="number" step=".01" value="8"><input id="target" type="hidden" value="${target}"><button class="calc" onclick="goal()">Estimate</button><div id="out"></div>`}
+if(type==='compound') html+=`<h2>Compound Interest</h2><label>Principal (৳)</label><input id="a" type="number" value="100000"><label>Annual rate (%)</label><input id="r" type="number" step=".01" value="8"><label>Time (years)</label><input id="n" type="number" value="5"><label>Compounding</label><select id="freq"><option value="12">Monthly</option><option value="4">Quarterly</option><option value="2">Half-yearly</option><option value="1">Yearly</option></select><button class="calc" onclick="compound()">Calculate</button><div id="out"></div>`;
+if(type==='bank') html+=`<h2>Bank Comparison</h2><p class="sub">Enter quoted rates from the banks you want to compare.</p><label>Deposit amount (৳)</label><input id="a" type="number" value="500000"><label>Tenure (years)</label><input id="n" type="number" value="1"><label>Bank A rate (%)</label><input id="ra" type="number" step=".01" value="9"><label>Bank B rate (%)</label><input id="rb" type="number" step=".01" value="8.5"><label>Bank C rate (%)</label><input id="rc" type="number" step=".01" value="8"><button class="calc" onclick="bankCompare()">Compare</button><div id="out"></div>`;
+if(type==='sanchay') html+=`<h2>Sanchayapatra Calculator</h2><p class="sub">Use the current official profit rate applicable to the certificate and purchase date.</p><label>Investment (৳)</label><input id="a" type="number" value="500000"><label>Annual profit rate (%)</label><input id="r" type="number" step=".01" value="11.83"><label>Tenure (years)</label><input id="n" type="number" value="5"><label>Tax/other deduction (%)</label><input id="tax" type="number" step=".01" value="0"><button class="calc" onclick="sanchay()">Estimate</button><div id="out"></div>`;
+if(type==='eligibility') html+=`<h2>Loan Eligibility</h2><p class="sub">Indicative affordability estimate — actual bank approval depends on the lender.</p><label>Monthly net income (৳)</label><input id="income" type="number" value="80000"><label>Existing monthly debt/EMI (৳)</label><input id="debt" type="number" value="10000"><label>Maximum total EMI ratio (%)</label><input id="dbr" type="number" step=".1" value="40"><label>Annual loan rate (%)</label><input id="r" type="number" step=".01" value="12"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="eligibility()">Estimate</button><div id="out"></div>`;
+if(type==='interest') html+=`<h2>Simple Interest</h2><label>Principal (৳)</label><input id="a" type="number" value="100000"><label>Annual rate (%)</label><input id="r" type="number" step=".01" value="8"><label>Time (years)</label><input id="n" type="number" value="3"><button class="calc" onclick="interest()">Calculate</button><div id="out"></div>`;
+p.innerHTML=html}
+function box(main,rows){document.getElementById('out').innerHTML='<div class="result" id="shareResult"><strong>'+main+'</strong>'+rows.map(x=>'<div class="row"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('')+'<button class="calc" onclick="shareResult()">📤 Share Result</button><button class="calc" style="margin-top:8px;background:#0f172a" onclick="printResult()">📄 PDF / Print</button></div><div class="ad">ADVERTISEMENT</div>'}
+function shareResult(){let text=document.getElementById('shareResult').innerText;if(navigator.share) navigator.share({title:'Financial Calculator BD',text});else navigator.clipboard.writeText(text).then(()=>alert('Result copied.'))}
+function printResult(){let el=document.getElementById('shareResult').innerHTML;let w=window.open('','_blank');w.document.write('<html><head><title>Financial Calculator BD</title><style>body{font-family:Arial;padding:30px} .row{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #ddd}button{display:none}</style></head><body><h2>Financial Calculator BD</h2>'+el+'</body></html>');w.document.close();w.print()}
+function emi(){let A=+a.value,R=+r.value/1200,N=+n.value*12,M=R?A*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1):A/N;box(money(M),[['Total payment',money(M*N)],['Total interest',money(M*N-A)]])}
+function dps(){let A=+a.value,R=+r.value/1200,N=+n.value*12;let F=R?A*((Math.pow(1+R,N)-1)/R):A*N;box(money(F),[['Total deposit',money(A*N)],['Estimated profit',money(F-A*N)]])}
+function fdr(){let A=+a.value,R=+r.value/100,N=+n.value;let F=A*Math.pow(1+R,N);box(money(F),[['Deposit',money(A)],['Estimated profit',money(F-A)]])}
+function interest(){let A=+a.value,R=+r.value/100,N=+n.value;let I=A*R*N;box(money(A+I),[['Principal',money(A)],['Interest',money(I)]])}
+function goal(){let A=+a.value,M=+m.value,R=+r.value/1200,T=+target.value;let months=0,b=A;while(b<T&&months<1200){b=b*(1+R)+M;months++}box(months<1200?(Math.floor(months/12)+' years '+months%12+' months'):'Over 100 years',[['Target',money(T)],['Projected balance',money(b)]])}
+
+function compound(){let A=+a.value,R=+r.value/100,N=+n.value,F=+freq.value;let V=A*Math.pow(1+R/F,F*N);box(money(V),[['Principal',money(A)],['Estimated interest',money(V-A)],['Compounding',F===12?'Monthly':F===4?'Quarterly':F===2?'Half-yearly':'Yearly']])}
+function bankCompare(){let A=+a.value,N=+n.value,rs=[+ra.value,+rb.value,+rc.value];let vals=rs.map(x=>A*Math.pow(1+x/100,N));let best=Math.max(...vals),names=['Bank A','Bank B','Bank C'];box(money(best),vals.map((v,i)=>[names[i]+' maturity',money(v)]))}
+function sanchay(){let A=+a.value,R=+r.value/100,N=+n.value,t=+tax.value;let gross=A*Math.pow(1+R,N)-A;let net=gross*(1-t/100);box(money(A+net),[['Investment',money(A)],['Estimated gross profit',money(gross)],['Estimated deduction',money(gross-net)],['Estimated net maturity',money(A+net)]])}
+function eligibility(){let income=+document.getElementById('income').value,debt=+document.getElementById('debt').value,max=income*(+dbr.value/100),emi=Math.max(0,max-debt),R=+r.value/1200,N=+n.value*12;let loan=R?emi*(Math.pow(1+R,N)-1)/(R*Math.pow(1+R,N)):emi*N;box(money(loan),[['Maximum total EMI',money(max)],['Estimated new EMI capacity',money(emi)],['Indicative loan amount',money(loan)]])}
+function toggleDark(){document.body.classList.toggle('dark')}
+if('serviceWorker'in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body></html>
