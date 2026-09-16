@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a"><title>Financial Calculator BD — v6</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
+<style>
+:root{--bg:#eaf5f1;--card:#ffffff;--text:#26364a;--muted:#6f7b8d;--accent:#0d805f;--accent2:#0b6e55;--line:#dce7e3;--soft:#e9f8f0;--good:#0f9f55;--gold:#f4bf2a}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:820px;margin:auto;padding:0 16px 88px}.top{display:flex;align-items:center;justify-content:space-between;margin:0 -16px 18px;padding:20px 20px 18px;background:linear-gradient(135deg,#079b68,#087e5f);color:#fff;border-bottom:1px solid #bcefd7}.top .sub{color:#d8f8e9}.top .iconbtn{background:#ffffff20;color:#fff;box-shadow:none}.brand{display:flex;gap:12px;align-items:center}.logo{width:58px;height:58px;border-radius:50%;background:#ffffff25;color:#ffd34d;display:grid;place-items:center;font-weight:900;font-size:29px}h1{font-size:21px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}button{border:0;cursor:pointer}.iconbtn{width:42px;height:42px;border-radius:13px;background:var(--card);box-shadow:0 4px 16px #0f172a10;font-size:19px}.hero{background:linear-gradient(135deg,#087e5f,#075e49);color:white;border-radius:24px;padding:22px;margin-bottom:18px;box-shadow:0 12px 30px #0f172a20}.hero p{margin:5px 0 0;color:#cbd5e1;font-size:13px}.hero strong{font-size:25px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;text-align:left;min-height:108px;box-shadow:0 5px 18px #0f172a08}.card .emoji{font-size:25px}.card b{display:block;margin-top:10px}.card small{color:var(--muted)}.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-top:16px}.panel.active{display:block}.back{background:var(--soft);color:var(--accent);padding:9px 13px;border-radius:10px;margin-bottom:14px}label{display:block;font-size:12px;color:var(--muted);margin:12px 0 6px}input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff}select{appearance:auto}.calc{width:100%;padding:14px;border-radius:13px;background:var(--accent);color:white;font-weight:700;margin-top:16px}.result{background:var(--soft);border-radius:16px;padding:16px;margin-top:16px}.result strong{font-size:24px}.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #dbeafe}.row:last-child{border:0}.nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffee;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px calc(16px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center}.nav button{background:transparent;color:var(--muted);padding:6px 24px;font-weight:600}.ad{height:50px;border:1px dashed #cbd5e1;border-radius:12px;display:grid;place-items:center;color:#94a3b8;font-size:11px;margin:16px 0}.note{font-size:12px;color:var(--muted);background:#f8fafc;border:1px solid var(--line);padding:10px;border-radius:12px;margin-top:10px}.scheme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}.scheme{border:1px solid #dfe4e8;border-radius:16px;padding:14px;background:#fff;text-align:left;box-shadow:0 3px 12px #16324a08}.scheme b{display:block;margin-bottom:5px}.pill{display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;background:#dff8e9;color:var(--good);margin-bottom:6px}.sanchay-page{margin:-2px -2px 0}.sanchay-title{display:flex;gap:12px;align-items:center;font-size:30px;line-height:1.15;margin:10px 0 6px;font-weight:850}.sanchay-title .calc-icon{width:44px;height:44px;border-radius:10px;background:#dff8e9;color:#149b55;display:grid;place-items:center;font-size:28px}.sanchay-subtitle{font-size:18px;color:#7b8492;margin-bottom:24px}.sanchay-divider{height:1px;background:#e9edf0;margin:0 0 28px}.sanchay-card{background:#fff;border:1px solid #e1e5e9;border-radius:28px;padding:24px 22px 28px;box-shadow:0 8px 28px #16324a0b}.sanchay-card h3{font-size:20px;margin:0 0 14px}.sanchay-select{height:58px;border:2px solid #e1e5e9;border-radius:20px;font-weight:700;font-size:17px;padding:0 18px}.sanchay-label{font-size:17px;font-weight:650;color:#344256;margin-top:24px}.sanchay-input{height:62px;border:2px solid #e1e5e9;border-radius:20px;font-size:18px;padding:0 18px}.quick-amounts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.quick-amounts button{background:#f7f8fa;border:2px solid #e3e6ea;border-radius:22px;padding:9px 18px;font-size:15px;color:#344256}.info2026{margin-top:28px;background:#effcf4;border:2px solid #b5f1ce;border-radius:28px;padding:26px 22px}.info2026 h3{margin:0 0 18px;font-size:23px;color:#155b39}.info-row{display:flex;gap:13px;margin:15px 0;font-size:16px;line-height:1.5}.info-check{width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#19aa5a;color:#fff;display:grid;place-items:center;font-weight:900}.sanchay-result{margin-top:20px}.tablewrap{overflow:auto;margin-top:12px}.rate-table{width:100%;border-collapse:collapse;font-size:12px;min-width:650px}.rate-table th,.rate-table td{border:1px solid var(--line);padding:9px;text-align:left}.rate-table th{background:#f8fafc}.bar{display:flex;gap:8px;align-items:center}.bar select{flex:1}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.scheme-grid{grid-template-columns:repeat(4,1fr)}}body.dark{--bg:#0b1120;--card:#111827;--text:#f8fafc;--muted:#94a3b8;--line:#263244;--soft:#172554}body.dark input,body.dark select{background:#0f172a;color:#fff}body.dark .note,body.dark .rate-table th{background:#0f172a}
+</style>
+<style>
+body{background:linear-gradient(180deg,#d9eee7 0,#eff8f5 34%,#e8f3ef 100%);min-height:100vh}
+.app{padding-top:0}
+.top{min-height:132px;padding:28px 24px 24px;background:linear-gradient(135deg,#087b5d,#126f59);border:0;box-shadow:0 8px 24px #0c493018}
+.logo{width:68px;height:68px;background:#ffffff1c;color:var(--gold);font-size:33px}
+.brand h1{font-size:30px;letter-spacing:.2px}.top .sub{font-size:16px;margin-top:4px}
+.hero{display:none}.version-badge{margin:12px 0 10px;padding:10px 14px;border-radius:14px;background:#dff7ea;border:1px solid #aee4c8;color:#087b5d;font-weight:800;font-size:13px}.home-title{font-size:22px;margin:16px 2px;color:#18513f}.ad{background:#ffffff70;border-color:#b9d7cc;color:#7b928a}
+.grid{gap:14px}.card{min-height:130px;border-radius:24px;padding:18px;background:linear-gradient(145deg,#fff,#f8fcfa);border:1px solid #dbe9e4;box-shadow:0 8px 20px #0c49300d;transition:.18s transform,.18s box-shadow}
+.card:active{transform:scale(.98)}.card .emoji{font-size:30px}.card b{font-size:16px}.card small{font-size:12px}
+.panel{border-radius:30px;border:1px solid #d7e6e0;background:#fff;box-shadow:0 16px 36px #0c493012;padding:22px;margin-top:8px}
+.panel h2{font-size:26px;margin:8px 0 18px;color:#26364a}.back{border-radius:14px;background:#e7f6ee;color:#087b5d;font-weight:700}
+label{font-size:14px;font-weight:700;color:#3b4a5d;margin-top:18px}input,select{border:2px solid #e0e7e5;border-radius:18px;padding:16px;background:#fff}
+.calc{border-radius:18px;background:linear-gradient(135deg,#0b8b66,#087054);box-shadow:0 8px 16px #0a745c22}
+.result{border:1px solid #cdebdc;background:#f0fbf5;border-radius:22px}.result strong{color:#0a7a58}
+.info2026{background:linear-gradient(145deg,#f4fcf7,#e8f8f0)}.sanchay-card{border-color:#dfe9e5}.sanchay-title{color:#26364a}.sanchay-title .calc-icon{background:#dff7eb}
+.nav{background:#fffffff2;border-color:#d9e5e1}.nav button{color:#527064}.nav button:first-child{color:#087b5d}
+.rate-table th{background:#eaf7f1;color:#225443}.rate-table td{background:#fff}
+body.dark .panel,body.dark .sanchay-card,body.dark .card{background:#111c1a;border-color:#223c34}body.dark .nav{background:#0d1715f2}
+</style>
+
+<style>
+.version-badge{animation:none}
+.home-title{font-weight:850}
+.panel .note b{color:#087b5d}
+.panel h2{font-weight:850}
+</style>
+</head>
+<body><div class="app">
+<header class="top"><div class="brand"><div class="logo">৳</div><div><h1>Financial Calculator BD</h1><div class="sub">বাংলাদেশের স্মার্ট ফাইন্যান্স টুলকিট • Version 6</div></div></div><button class="iconbtn" onclick="toggleDark()">◐</button></header>
+<section class="hero"><strong>Plan smarter. Save better.</strong><p>DPS, FDR, Loan, Savings Scheme & Bank Comparison</p></section><div class="version-badge">✓ Updated Financial Calculator BD v6</div><div class="ad">ADVERTISEMENT</div><h2 class="home-title">আপনার প্রয়োজনীয় আর্থিক হিসাব এক জায়গায়</h2><div id="home" class="grid">
+<button class="card" onclick="openCalc('emi')"><span class="emoji">🏦</span><b>EMI / Loan</b><small>EMI + Amortization</small></button>
+<button class="card" onclick="openCalc('dps')"><span class="emoji">💰</span><b>DPS</b><small>Choose profit method</small></button>
+<button class="card" onclick="openCalc('fdr')"><span class="emoji">📈</span><b>FDR</b><small>Fixed deposit</small></button>
+<button class="card" onclick="openCalc('goal')"><span class="emoji">🎯</span><b>Kotipoti Goal</b><small>Simple / Compound</small></button>
+<button class="card" onclick="openCalc('million')"><span class="emoji">💎</span><b>Millionaire Goal</b><small>Simple / Compound</small></button>
+<button class="card" onclick="openCalc('advance')"><span class="emoji">🚀</span><b>Advanced Schemes</b><small>Millionaire + Kotipoti</small></button>
+<button class="card" onclick="openCalc('bank')"><span class="emoji">🏦</span><b>Bank Comparison</b><small>DPS/FDR/Goals/MBDS/Loan</small></button>
+<button class="card" onclick="openCalc('sanchay')"><span class="emoji">🏛️</span><b>Sanchayapatra</b><small>4 government schemes</small></button>
+<button class="card" onclick="openCalc('eligibility')"><span class="emoji">✅</span><b>Loan Eligibility</b><small>Indicative affordability</small></button>
+</div><section id="panel" class="panel"></section></div>
+<div class="nav"><button onclick="showHome()">⌂ Home</button><button onclick="alert('History will be added in the next version.')">◷ History</button></div>
+<script>
+const p=document.getElementById('panel'),home=document.getElementById('home');
+const money=n=>'৳'+Number(n||0).toLocaleString('en-BD',{maximumFractionDigits:2});
+function showHome(){p.classList.remove('active');home.style.display='grid'}
+function openCalc(type){home.style.display='none';p.classList.add('active');let html='<button class="back" onclick="showHome()">← Back</button>';
+if(type==='emi') html+=`<h2>EMI / Loan Calculator</h2><label>Loan amount (৳)</label><input id="a" type="number" value="1000000"><label>Annual interest (%)</label><input id="r" type="number" step=".01" value="10"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="emi()">Calculate EMI + Amortization</button><div id="out"></div>`;
+if(type==='dps') html+=`<h2>DPS Calculator</h2><label>Monthly deposit (৳)</label><input id="a" type="number" value="5000"><label>Annual profit rate (%)</label><input id="r" type="number" step=".01" value="8"><label>Tenure (years)</label><input id="n" type="number" value="5"><label>Profit calculation method</label><select id="method"><option value="compound">Compound / periodic reinvestment</option><option value="simple">Simple</option></select><button class="calc" onclick="dps()">Calculate</button><div id="out"></div>`;
+if(type==='fdr') html+=`<h2>FDR Calculator</h2><label>Deposit (৳)</label><input id="a" type="number" value="500000"><label>Annual profit rate (%)</label><input id="r" type="number" step=".01" value="9"><label>Tenure (years)</label><input id="n" type="number" value="1"><button class="calc" onclick="fdr()">Calculate</button><div id="out"></div>`;
+if(type==='goal') html+=`<h2>Kotipoti Goal</h2><label>Current savings (৳)</label><input id="a" type="number" value="100000"><label>Monthly deposit (৳)</label><input id="m" type="number" value="10000"><label>Expected annual return (%)</label><input id="r" type="number" step=".01" value="8"><label>Calculation method</label><select id="method"><option value="compound">Compound</option><option value="simple">Simple</option></select><input id="target" type="hidden" value="10000000"><button class="calc" onclick="goal()">Estimate</button><div id="out"></div>`;
+if(type==='million') html+=`<h2>Millionaire Goal</h2><label>Current savings (৳)</label><input id="a" type="number" value="100000"><label>Monthly deposit (৳)</label><input id="m" type="number" value="10000"><label>Expected annual return (%)</label><input id="r" type="number" step=".01" value="8"><label>Calculation method</label><select id="method"><option value="compound">Compound</option><option value="simple">Simple</option></select><input id="target" type="hidden" value="1000000"><button class="calc" onclick="goal()">Estimate</button><div id="out"></div>`;
+if(type==='advance') html+=`<h2>Advanced Millionaire & Kotipoti Scheme</h2><label>Scheme</label><select id="scheme"><option value="1000000">Advanced Millionaire — Target ৳10,00,000</option><option value="10000000">Advanced Kotipoti — Target ৳1,00,00,000</option></select><label>Initial deposit (৳)</label><input id="a" type="number" value="500000"><label>Tenure (years)</label><input id="n" type="number" value="10"><label>Expected annual return (%)</label><input id="r" type="number" step=".01" value="8"><label>Calculation method</label><select id="method"><option value="compound">Compound</option><option value="simple">Simple</option></select><button class="calc" onclick="advance()">Calculate Required Monthly Installment</button><div id="out"></div><div class="note">Advanced schemes use an initial deposit of ৳5,00,000 by default. Change it if your bank's actual scheme uses another amount.</div>`;
+if(type==='bank') html+=`<h2>Bank Comparison</h2><p class="sub">Client enters only amount and tenure. The app compares the stored current rate dataset across products.</p><label>Amount (৳)</label><input id="a" type="number" value="500000"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="bankCompare()">Compare Banks</button><div id="out"></div><div class="note">Official-source rate database; exact product/tenure matches only. If no current official rate is verified, the result shows “—”.</div>`;
+if(type==='sanchay') html+=`<div class="sanchay-page"><div class="sanchay-title"><span class="calc-icon">▦</span><span>মুনাফা বের করুন</span></div><div class="sanchay-subtitle">সঞ্চয়পত্রের ধরন এবং টাকার পরিমাণ দিন</div><div class="sanchay-divider"></div><div class="sanchay-card"><h3>সঞ্চয়পত্রের ধরন নির্বাচন করুন</h3><select id="stype" class="sanchay-select" onchange="setSanchayDefaults()"><option value="five">৫ বছর মেয়াদী বাংলাদেশ সঞ্চয়পত্র</option><option value="family">পরিবার সঞ্চয়পত্র</option><option value="quarter">৩ মাস অন্তর মুনাফাভিত্তিক সঞ্চয়পত্র</option><option value="pension">পেনশনার সঞ্চয়পত্র</option></select><div class="sanchay-label">বিনিয়োগের পরিমাণ (টাকা)</div><input id="a" class="sanchay-input" type="number" value="500000" placeholder="৳ যেমন: 500000"><div class="quick-amounts"><button onclick="setAmt(100000)">১ লক্ষ</button><button onclick="setAmt(500000)">৫ লক্ষ</button><button onclick="setAmt(1000000)">১০ লক্ষ</button><button onclick="setAmt(1500000)">১৫ লক্ষ</button></div><label class="sanchay-label">প্রযোজ্য মুনাফার হার (%)</label><input id="r" class="sanchay-input" type="number" step=".01" value="11.83"><label class="sanchay-label">মেয়াদ (বছর)</label><input id="n" class="sanchay-input" type="number" value="5"><label class="sanchay-label">কর/অন্যান্য কর্তন (%)</label><input id="tax" class="sanchay-input" type="number" step=".01" value="0"><button class="calc" onclick="sanchay()">মুনাফা হিসাব করুন</button><div id="out" class="sanchay-result"></div></div><div class="info2026"><h3>💡 জরুরি তথ্য ২০২৬</h3><div class="info-row"><span class="info-check">✓</span><span><b>ট্যাক্স:</b> ৫ লক্ষ টাকার বেশি বিনিয়োগ থাকলে প্রযোজ্য উৎসে কর/করহার সরকারি নিয়ম অনুযায়ী প্রযোজ্য হতে পারে।</span></div><div class="info-row"><span class="info-check">✓</span><span><b>স্ল্যাব:</b> বিনিয়োগের পরিমাণ ও প্রযোজ্য হার অনুযায়ী মুনাফা পরিবর্তিত হতে পারে।</span></div><div class="info-row"><span class="info-check">✓</span><span><b>মেয়াদ:</b> মেয়াদপূর্তির আগে ভাঙালে প্রযোজ্য নিয়ম অনুযায়ী কম মুনাফা/সমন্বয় হতে পারে (penal interest/adjustment)।</span></div></div><div class="note">Rate, tax and premature-encashment rules should be kept updated from official National Savings/Bangladesh Bank notices before production use.</div></div>`;
+if(type==='eligibility') html+=`<h2>Loan Eligibility</h2><label>Monthly net income (৳)</label><input id="income" type="number" value="80000"><label>Existing monthly debt/EMI (৳)</label><input id="debt" type="number" value="10000"><label>Maximum total EMI ratio (%)</label><input id="dbr" type="number" step=".1" value="40"><label>Annual loan rate (%)</label><input id="r" type="number" step=".01" value="12"><label>Tenure (years)</label><input id="n" type="number" value="5"><button class="calc" onclick="eligibility()">Estimate</button><div id="out"></div>`;
+p.innerHTML=html}
+function setAmt(v){document.getElementById('a').value=v}function setSanchayDefaults(){let x=document.getElementById('stype').value;let defaults={family:[11.83,5],quarter:[11.82,3],pension:[11.83,5],five:[11.83,5]};let d=defaults[x]||defaults.five;document.getElementById('r').value=d[0];document.getElementById('n').value=d[1]}function pickS(x){document.getElementById('stype').value=x;setSanchayDefaults()}
+function box(main,rows,extra=''){document.getElementById('out').innerHTML='<div class="result" id="shareResult"><strong>'+main+'</strong>'+rows.map(x=>'<div class="row"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('')+extra+'<button class="calc" onclick="shareResult()">📤 Share Result</button><button class="calc" style="margin-top:8px;background:#0f172a" onclick="printResult()">📄 PDF / Print</button></div><div class="ad">ADVERTISEMENT</div>'}
+function shareResult(){let text=document.getElementById('shareResult').innerText;if(navigator.share) navigator.share({title:'Financial Calculator BD',text});else navigator.clipboard.writeText(text).then(()=>alert('Result copied.'))}
+function printResult(){let el=document.getElementById('shareResult').innerHTML;let w=window.open('','_blank');w.document.write('<html><head><title>Financial Calculator BD — v6</title><style>body{font-family:Arial;padding:30px}.row{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #ddd}button{display:none}</style>
+<style>
+body{background:linear-gradient(180deg,#d9eee7 0,#eff8f5 34%,#e8f3ef 100%);min-height:100vh}
+.app{padding-top:0}
+.top{min-height:132px;padding:28px 24px 24px;background:linear-gradient(135deg,#087b5d,#126f59);border:0;box-shadow:0 8px 24px #0c493018}
+.logo{width:68px;height:68px;background:#ffffff1c;color:var(--gold);font-size:33px}
+.brand h1{font-size:30px;letter-spacing:.2px}.top .sub{font-size:16px;margin-top:4px}
+.hero{display:none}.version-badge{margin:12px 0 10px;padding:10px 14px;border-radius:14px;background:#dff7ea;border:1px solid #aee4c8;color:#087b5d;font-weight:800;font-size:13px}.home-title{font-size:22px;margin:16px 2px;color:#18513f}.ad{background:#ffffff70;border-color:#b9d7cc;color:#7b928a}
+.grid{gap:14px}.card{min-height:130px;border-radius:24px;padding:18px;background:linear-gradient(145deg,#fff,#f8fcfa);border:1px solid #dbe9e4;box-shadow:0 8px 20px #0c49300d;transition:.18s transform,.18s box-shadow}
+.card:active{transform:scale(.98)}.card .emoji{font-size:30px}.card b{font-size:16px}.card small{font-size:12px}
+.panel{border-radius:30px;border:1px solid #d7e6e0;background:#fff;box-shadow:0 16px 36px #0c493012;padding:22px;margin-top:8px}
+.panel h2{font-size:26px;margin:8px 0 18px;color:#26364a}.back{border-radius:14px;background:#e7f6ee;color:#087b5d;font-weight:700}
+label{font-size:14px;font-weight:700;color:#3b4a5d;margin-top:18px}input,select{border:2px solid #e0e7e5;border-radius:18px;padding:16px;background:#fff}
+.calc{border-radius:18px;background:linear-gradient(135deg,#0b8b66,#087054);box-shadow:0 8px 16px #0a745c22}
+.result{border:1px solid #cdebdc;background:#f0fbf5;border-radius:22px}.result strong{color:#0a7a58}
+.info2026{background:linear-gradient(145deg,#f4fcf7,#e8f8f0)}.sanchay-card{border-color:#dfe9e5}.sanchay-title{color:#26364a}.sanchay-title .calc-icon{background:#dff7eb}
+.nav{background:#fffffff2;border-color:#d9e5e1}.nav button{color:#527064}.nav button:first-child{color:#087b5d}
+.rate-table th{background:#eaf7f1;color:#225443}.rate-table td{background:#fff}
+body.dark .panel,body.dark .sanchay-card,body.dark .card{background:#111c1a;border-color:#223c34}body.dark .nav{background:#0d1715f2}
+</style>
+
+<style>
+.version-badge{animation:none}
+.home-title{font-weight:850}
+.panel .note b{color:#087b5d}
+.panel h2{font-weight:850}
+</style>
+</head><body><h2>Financial Calculator BD</h2>'+el+'</body></html>');w.document.close();w.print()}
+function emi(){let A=+a.value,R=+r.value/1200,N=+n.value*12,M=R?A*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1):A/N;let bal=A,rows=[],interestTotal=0;for(let i=1;i<=N;i++){let interest=bal*R,principal=M-interest;if(i===N){principal=bal;MFinal=principal+interest;}let pay=i===N?principal+interest:M;bal=Math.max(0,bal-principal);interestTotal+=interest;rows.push([i, money(pay),money(principal),money(interest),money(bal)]);}let extra='<div class="note"><b>EMI Amortization Schedule</b> — প্রতি মাসের installment, principal, interest এবং remaining balance.</div><div class="tablewrap"><table class="rate-table"><thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>'+rows.map(x=>'<tr>'+x.map(y=>'<td>'+y+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';box(money(M),[['Total payment',money(M*N)],['Total interest',money(interestTotal)]],extra)}
+function dps(){let A=+a.value,R=+r.value/1200,N=+n.value*12,F;if(method.value==='compound') F=R?A*((Math.pow(1+R,N)-1)/R):A*N;else F=A*N + (A*R*N*(N+1)/2);box(money(F),[['Total deposit',money(A*N)],['Estimated profit',money(F-A*N)],['Method',method.value==='compound'?'Compound':'Simple']])}
+function fdr(){let A=+a.value,R=+r.value/100,N=+n.value;let F=A*Math.pow(1+R,N);box(money(F),[['Deposit',money(A)],['Estimated profit',money(F-A)]])}
+function goal(){let A=+a.value,M=+m.value,R=+r.value/1200,T=+target.value,months=0,b=A;while(b<T&&months<1200){months++;if(method.value==='compound')b=b*(1+R)+M;else b=A+M*months+(+r.value/100)*(A+M*months)*months/12;}box(months<1200?(Math.floor(months/12)+' years '+months%12+' months'):'Over 100 years',[['Target',money(T)],['Projected balance',money(b)],['Method',method.value==='compound'?'Compound':'Simple']])}
+function advance(){let T=+scheme.value,A=+a.value,N=+n.value*12,R=+r.value/1200;let req;if(method.value==='compound'){let fv=A*Math.pow(1+R,N);req=fv>=T?0:(R?((T-fv)*R/(Math.pow(1+R,N)-1)):((T-fv)/N));}else{let annual=+r.value/100,base=A*(1+annual*(+n.value));req=Math.max(0,(T-base)/(N*(1+annual*(+n.value)/2)));}box(money(req),[['Target',money(T)],['Initial deposit',money(A)],['Tenure',n.value+' years'],['Method',method.value==='compound'?'Compound':'Simple']])}
+const bankRateDB={
+  updatedOn:"2026-09-16",
+  sources:[
+    {bank:"Prime Bank PLC",effective:"2026-08-31",url:"https://www.primebank.com.bd/assets/interest-rate/1788156255-Interest-Rate-Conventional-w-e-f-31-AUG-26-UPDATED.pdf"},
+    {bank:"Eastern Bank PLC",effective:"2026-08-02",url:"https://www.ebl.com.bd/assets/home/interest/Deposit_Rate_sheet-ED_02_August_2026_EBL_WEB_Version.pdf"},
+    {bank:"Dutch-Bangla Bank PLC",effective:"current public product page",url:"https://www.dutchbanglabank.com/depositsadv/term-deposit.html"},
+    {bank:"Bank Asia PLC",effective:"2026-09-15 / 2026-02-01 scheme brochure",url:"https://www.bankasia-bd.com/other/interestrates"}
+  ],
+  rows:[
+    // Prime Bank — conventional, effective 31-Aug-2026
+    ["Prime Bank PLC","DPS",5,9.00,"Prime Kotipoti DPS"],["Prime Bank PLC","DPS",7,9.00,"Prime Kotipoti DPS"],["Prime Bank PLC","DPS",10,9.00,"Prime Kotipoti DPS"],["Prime Bank PLC","DPS",12,9.00,"Prime Kotipoti DPS"],["Prime Bank PLC","DPS",15,9.00,"Prime Kotipoti DPS"],
+    ["Prime Bank PLC","Millionaire",5,6.00,"Prime Millionaire Scheme"],["Prime Bank PLC","Millionaire",7,6.00,"Prime Millionaire Scheme"],["Prime Bank PLC","Millionaire",10,7.00,"Prime Millionaire Scheme"],["Prime Bank PLC","Millionaire",12,7.00,"Prime Millionaire Scheme"],
+    ["Prime Bank PLC","FDR",0.25,7.00,"Prime Fixed Deposit"],["Prime Bank PLC","FDR",0.5,8.00,"Prime Fixed Deposit"],["Prime Bank PLC","FDR",1,8.50,"Prime Fixed Deposit"],["Prime Bank PLC","FDR",2,8.00,"Prime Fixed Deposit"],["Prime Bank PLC","FDR",3,8.00,"Prime Fixed Deposit"],
+    ["Prime Bank PLC","Loan",1,12.00,"Other personal loans — declared rate"],
+    // EBL — retail deposit sheet effective 02-Aug-2026
+    ["Eastern Bank PLC","DPS",1,9.50,"EBL Secure DPS"],["Eastern Bank PLC","Millionaire",3,9.00,"EBL Millionaire Scheme"],["Eastern Bank PLC","Millionaire",5,9.00,"EBL Millionaire Scheme"],["Eastern Bank PLC","Millionaire",7,8.75,"EBL Millionaire Scheme"],["Eastern Bank PLC","Millionaire",10,8.75,"EBL Millionaire Scheme"],["Eastern Bank PLC","Millionaire",12,8.75,"EBL Millionaire Scheme"],
+    ["Eastern Bank PLC","Kotipoti",5,9.00,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",8,8.75,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",10,8.75,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",12,8.75,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",14,8.75,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",15,8.75,"EBL Kotipoti"],["Eastern Bank PLC","Kotipoti",18,8.75,"EBL Kotipoti"],
+    ["Eastern Bank PLC","FDR",0.25,6.35,"EBL FD"],["Eastern Bank PLC","FDR",0.5,6.50,"EBL FD"],["Eastern Bank PLC","FDR",1,6.50,"EBL FD"],["Eastern Bank PLC","FDR",2,7.25,"EBL FD"],["Eastern Bank PLC","FDR",3,7.25,"EBL FD"],
+    // DBBL — public product page
+    ["Dutch-Bangla Bank PLC","DPS",3,9.50,"DBBL Deposit Plus Scheme"],["Dutch-Bangla Bank PLC","DPS",5,9.50,"DBBL Deposit Plus Scheme"],["Dutch-Bangla Bank PLC","DPS",8,9.50,"DBBL Deposit Plus Scheme"],["Dutch-Bangla Bank PLC","DPS",10,9.50,"DBBL Deposit Plus Scheme"],
+    ["Dutch-Bangla Bank PLC","MBDS",3,9.50,"DBBL Millionaire Deposit Scheme (MDS) — mapped as scheme product"],["Dutch-Bangla Bank PLC","FDR",0.25,7.00,"Term Deposit"],["Dutch-Bangla Bank PLC","FDR",0.5,7.10,"Term Deposit"],["Dutch-Bangla Bank PLC","FDR",1,7.20,"Term Deposit"],["Dutch-Bangla Bank PLC","FDR",2,7.20,"Term Deposit"],["Dutch-Bangla Bank PLC","FDR",3,7.20,"Term Deposit"],["Dutch-Bangla Bank PLC","FDR",1.0833,8.50,"13 Months FDR"],
+    // Bank Asia — official interest page + DPS brochure
+    ["Bank Asia PLC","DPS",3,9.81,"DPS+"],["Bank Asia PLC","DPS",5,9.96,"DPS+"],["Bank Asia PLC","DPS",7,9.15,"DPS+"],["Bank Asia PLC","DPS",10,9.27,"DPS+"],["Bank Asia PLC","DPS",12,9.34,"DPS+"],
+    ["Bank Asia PLC","Kotipoti",5,10.89,"Sanchay-e Kotipoti"],["Bank Asia PLC","Kotipoti",7,10.63,"Sanchay-e Kotipoti"],["Bank Asia PLC","Kotipoti",10,9.24,"Sanchay-e Kotipoti"],["Bank Asia PLC","Kotipoti",12,9.27,"Sanchay-e Kotipoti"],["Bank Asia PLC","Kotipoti",15,9.31,"Sanchay-e Kotipoti"],
+    ["Bank Asia PLC","FDR",0.25,7.00,"FDR below Tk 1 crore"],["Bank Asia PLC","FDR",0.5,7.00,"FDR below Tk 1 crore"],["Bank Asia PLC","FDR",1,7.50,"FDR below Tk 1 crore"],["Bank Asia PLC","FDR",2,7.50,"FDR below Tk 1 crore"],["Bank Asia PLC","FDR",3,7.50,"FDR below Tk 1 crore"],["Bank Asia PLC","Loan",1,11.00,"Unsecured Personal Loan"],
+    ["Bank Asia PLC","Loan",1,9.99,"Home Loan"],["Bank Asia PLC","Loan",1,10.00,"Auto Loan"]
+  ]
+};
+function rateFor(bank,product,years,amount){
+  let rows=bankRateDB.rows.filter(x=>x[0]===bank&&x[1]===product);
+  if(!rows.length)return null;
+  // For FDR, honor the Bank Asia amount slab when applicable.
+  if(bank==='Bank Asia PLC'&&product==='FDR'){
+    let cr=amount>=10000000;
+    if(years===1)return cr?7.75:7.50;
+    if(years===2)return cr?7.75:7.50;
+    if(years===3)return cr?7.75:7.50;
+  }
+  let exact=rows.find(x=>Math.abs(x[2]-years)<0.01);
+  return exact||null;
+}
+function bankCompare(){
+  let A=+a.value,N=+n.value,products=['DPS','FDR','Millionaire','Kotipoti','MBDS','Loan'];
+  let banks=[...new Set(bankRateDB.rows.map(x=>x[0]))];
+  let table='<div class="tablewrap"><table class="rate-table"><thead><tr><th>Bank</th>'+products.map(x=>'<th>'+x+' Rate</th>').join('')+'</tr></thead><tbody>';
+  banks.forEach(b=>{table+='<tr><td><b>'+b+'</b></td>'+products.map(pr=>{let rec=rateFor(b,pr,N,A);return '<td>'+(rec?(rec[3]+'%<br><small>'+rec[4]+'</small>'):'—')+'</td>'}).join('')+'</tr>'});
+  table+='</tbody></table></div>';
+  let src='<div class="note"><b>Rate database updated:</b> '+bankRateDB.updatedOn+'<br>Rates shown only where an official public bank source gave a matching product/tenure. “—” means I did not find a current official public rate for that exact product/tenure, so the app does not guess.<br><br><b>Sources:</b>'+bankRateDB.sources.map(s=>'<br>• '+s.bank+' — effective/source: '+s.effective).join('')+'</div>';
+  box('Bank-wise Rate Comparison',[['Amount',money(A)],['Tenure',N+' years'],['Products','DPS • FDR • Millionaire • Kotipoti • MBDS • Loan']],table+src)
+}
+function sanchay(){let A=+a.value,R=+r.value/100,N=+n.value,t=+tax.value,gross=A*Math.pow(1+R,N)-A,net=gross*(1-t/100);box(money(A+net),[['Scheme',document.getElementById('stype').selectedOptions[0].text],['Investment',money(A)],['Estimated gross profit',money(gross)],['Estimated deduction',money(gross-net)],['Estimated net maturity',money(A+net)]])}
+function eligibility(){let income=+document.getElementById('income').value,debt=+document.getElementById('debt').value,max=income*(+dbr.value/100),emi=Math.max(0,max-debt),R=+r.value/1200,N=+n.value*12,loan=R?emi*(Math.pow(1+R,N)-1)/(R*Math.pow(1+R,N)):emi*N;box(money(loan),[['Maximum total EMI',money(max)],['Estimated new EMI capacity',money(emi)],['Indicative loan amount',money(loan)]])}
+function toggleDark(){document.body.classList.toggle('dark')}if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
